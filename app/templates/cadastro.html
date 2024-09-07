@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro de Questões</title>
+    <link rel="stylesheet" href="../static/css/styles.css" />
+    <style>
+      /* Estilos para mensagens de alerta */
+      .alert {
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+      }
+      .alert-danger {
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+      }
+      .alert-success {
+        color: #155724;
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Cadastro de Questões</h1>
+      <nav>
+        <ul>
+          <li><a href="{{ url_for('main.index') }}">Início</a></li>
+          <li>
+            <a href="{{ url_for('main.cadastro') }}">Cadastro de Questões</a>
+          </li>
+          <li>
+            <a href="{{ url_for('main.visualizador') }}"
+              >Visualizador de Questões</a
+            >
+          </li>
+          <li>
+            <a href="{{ url_for('main.minhas_avaliacoes') }}"
+              >Minhas Avaliações</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <!-- Bloco para exibir mensagens de alerta -->
+      {% with messages = get_flashed_messages(with_categories=True) %} {% if
+      messages %} {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %} {% endif %} {% endwith %}
+
+      <form
+        id="cadastro-form"
+        class="cadastro-input"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <label for="codigo_bncc">Código BNCC</label>
+        <input type="text" id="codigo_bncc" name="codigo_bncc" required />
+
+        <label for="disciplina">Disciplina</label>
+        <input type="text" id="disciplina" name="disciplina" required />
+
+        <label for="assunto">Assunto</label>
+        <input type="text" id="assunto" name="assunto" required />
+
+        <label for="autor">Autor</label>
+        <input type="text" id="autor" name="autor" required />
+
+        <label for="enunciado">Enunciado</label>
+        <textarea id="enunciado" name="enunciado" required></textarea>
+
+        <label for="imagem">Imagem (opcional)</label>
+        <input type="file" id="imagem" name="imagem" />
+
+        <label for="alternativa_a">Alternativa A</label>
+        <input type="text" id="alternativa_a" name="alternativa_a" required />
+
+        <label for="alternativa_b">Alternativa B</label>
+        <input type="text" id="alternativa_b" name="alternativa_b" required />
+
+        <label for="alternativa_c">Alternativa C</label>
+        <input type="text" id="alternativa_c" name="alternativa_c" required />
+
+        <label for="alternativa_d">Alternativa D</label>
+        <input type="text" id="alternativa_d" name="alternativa_d" required />
+
+        <label for="alternativa_e">Alternativa E</label>
+        <input type="text" id="alternativa_e" name="alternativa_e" required />
+
+        <label for="gabarito">Gabarito</label>
+        <select id="gabarito" name="gabarito" required>
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+          <option value="D">D</option>
+          <option value="E">E</option>
+        </select>
+
+        <label for="pontuacao">Pontuação</label>
+        <input type="number" id="pontuacao" name="pontuacao" min="1" required />
+
+        <button type="submit">Cadastrar Questão</button>
+      </form>
+    </main>
+    <footer>
+      <p>&copy; 2024 Gerador de Avaliações. Todos os direitos reservados.</p>
+    </footer>
+  </body>
+</html>

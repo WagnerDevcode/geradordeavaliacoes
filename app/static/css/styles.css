@@ -1,0 +1,300 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Corpo da página */
+body {
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #eaf4f4; /* Azul claro para o tema educacional */
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilos do Header */
+header {
+  background-color: #004080; /* Azul escuro */
+  color: #ffffff;
+  padding: 15px 0;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 0;
+}
+
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.3s;
+}
+
+nav ul li a:hover {
+  color: #b3d9ff; /* Azul claro ao passar o mouse */
+}
+
+/* Estilos do main */
+main {
+  padding: 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Estilos dos Cards */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin: 20px auto;
+  max-width: 100%; /* Aumente a largura máxima do container */
+  width: 150%;
+}
+
+.card {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 320px; /* Aumente a largura máxima dos cards */
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  flex: 1;
+  min-width: 280px; /* Aumente a largura mínima para o card */
+  flex-basis: calc(
+    33.333% - 20px
+  ); /* Calculado com base em 3 cards por linha e o gap */
+}
+
+.card h2 {
+  margin: 0 0 10px;
+  font-size: 1.5rem;
+  color: #004080; /* Azul escuro */
+}
+
+.card p {
+  margin: 0 0 20px;
+  color: #555;
+}
+
+.card .button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #ffffff;
+  background-color: #004080; /* Azul escuro */
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.card .button:hover {
+  background-color: #003366; /* Azul mais escuro ao passar o mouse */
+  transform: translateY(-2px);
+}
+
+.card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+/* Estilos do visualizador-container */
+.visualizador-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 120%; /* Aumente a largura máxima do container */
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.visualizador-card {
+  flex: 1 1 calc(33.333% - 20px); /* Ajusta a largura para três cards na horizontal */
+  box-sizing: border-box; /* Inclui padding e borda no cálculo da largura */
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px; /* Espaçamento entre os cards */
+  position: relative; /* Para permitir o alinhamento da caixa de seleção */
+  transition: background-color 0.3s; /* Transição suave para a mudança de cor */
+}
+
+.visualizador-container h1 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #004080; /* Azul escuro */
+}
+
+.visualizador-container .questoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  width: auto;
+}
+
+.visualizador-card h3 {
+  margin: 0 0 5px;
+  font-size: 1.25rem;
+  color: #000000; /* Azul escuro */
+}
+
+.visualizador-card p {
+  margin: 0 0 5px;
+}
+
+.visualizador-card-image {
+  max-width: 20%;
+  height: 30%;
+  border-radius: 5px;
+  margin: 10px 0;
+  align-items: center;
+}
+
+.visualizador-card .alternativas {
+  list-style: none;
+  padding: 0;
+  margin: 0, 0, 50px;
+}
+
+.visualizador-card .alternativas li {
+  margin-bottom: 5px;
+}
+
+.visualizador-card input[type="checkbox"] {
+  margin-top: 0px;
+}
+
+/* Estilo para a caixa de seleção */
+
+.visualizador-card input[type="checkbox"] {
+  width: 24px; /* Tamanho da caixa de seleção */
+  height: 50px; /* Tamanho da caixa de seleção */
+  margin: 10px 0; /* Espaçamento acima e abaixo da caixa de seleção */
+  position: absolute;
+  bottom: 20px; /* Alinha a caixa de seleção ao fundo do card */
+  right: 20px; /* Alinha a caixa de seleção à direita do card */
+}
+/* Estilo para cada item de alternativa */
+.visualizador-card ul.alternativas li {
+  margin-bottom: 10px; /* Espaço entre as alternativas */
+}
+/* Cor do card quando a caixa de seleção estiver marcada */
+.visualizador-card.selected {
+  background-color: rgba(
+    25,
+    204,
+    106,
+    0.16
+  ); /* Cor verde clara para o card selecionado */
+}
+
+/* Estilos do formulário */
+form {
+  max-width: 900px; /* Aumente a largura máxima do formulário */
+  width: 100%; /* Certifique-se de que o formulário usa a largura disponível até o máximo definido */
+  margin: 20px auto;
+  padding: 30px; /* Aumente o padding para melhorar o espaçamento interno */
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 1.1rem; /* Aumente o tamanho da fonte dos labels */
+}
+
+form input[type="text"],
+form input[type="number"],
+form textarea {
+  width: 100%;
+  padding: 12px; /* Aumente o padding para os inputs e textarea */
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem; /* Ajuste o tamanho da fonte dos inputs */
+}
+
+form button {
+  padding: 12px 25px; /* Aumente o padding do botão */
+  font-size: 1.1rem; /* Ajuste o tamanho da fonte do botão */
+  color: #ffffff;
+  background-color: #004080; /* Azul escuro */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+form button:hover {
+  background-color: #003366; /* Azul mais escuro ao passar o mouse */
+  transform: translateY(-2px);
+}
+
+/* Rodapé */
+footer {
+  background-color: #004080; /* Azul escuro */
+  color: #ffffff;
+  text-align: center;
+  padding: 8px 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin-top: auto;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    max-width: 90%;
+  }
+
+  form {
+    padding: 15px;
+  }
+
+  .visualizador-card {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  nav ul {
+    flex-direction: column;
+  }
+
+  nav ul li {
+    margin: 10px 0;
+  }
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home - Gerador de Avaliações</title>
+    <link rel="stylesheet" href="../static/css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Gerador de Avaliações</h1>
+      <nav>
+        <ul>
+          <li><a href="{{ url_for('main.index') }}">Início</a></li>
+          <li>
+            <a href="{{ url_for('main.cadastro') }}">Cadastro de Questões</a>
+          </li>
+          <li>
+            <a href="{{ url_for('main.visualizador') }}"
+              >Visualizador de Questões</a
+            >
+          </li>
+          <li>
+            <a href="{{ url_for('main.minhas_avaliacoes') }}"
+              >Minhas Avaliações</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section class="cards">
+        <div class="card">
+          <h2>Cadastro de Questões</h2>
+          <p>
+            Adicione novas questões para suas avaliações. Defina o autor,
+            pontuação, e alternativas.
+          </p>
+          <a href="{{ url_for('main.cadastro') }}" class="button"
+            >Ir para Cadastro</a
+          >
+        </div>
+        <div class="card">
+          <h2>Visualizador de Questões</h2>
+          <p>
+            Veja e revise as questões que você cadastrou. Organize e edite suas
+            questões conforme necessário.
+          </p>
+          <a href="{{ url_for('main.visualizador') }}" class="button"
+            >Ir para Visualizador</a
+          >
+        </div>
+        <div class="card">
+          <h2>Minhas Avaliações</h2>
+          <p>
+            Gere e visualize avaliações completas. Baixe em PDF ou DOCX e
+            gerencie suas avaliações.
+          </p>
+          <a href="{{ url_for('main.minhas_avaliacoes') }}" class="button"
+            >Ir para Minhas Avaliações</a
+          >
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2024 Gerador de Avaliações. Todos os direitos reservados.</p>
+    </footer>
+  </body>
+</html>

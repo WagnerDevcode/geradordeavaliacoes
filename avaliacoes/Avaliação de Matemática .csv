@@ -1,0 +1,13 @@
+ID,Código BNCC,Disciplina,Assunto,Autor,Enunciado,Alternativa A,Alternativa B,Alternativa C,Alternativa D,Alternativa E,Pontuação,Imagem
+1,EF01MA01,Matemática ,Números Inteiros,Wagner Santos,"Em um projeto para a construção de um cinema, os arquitetos estão avaliando a relação entre a quantidade de fileiras e a quantidade de cadeiras em cada fileira. O projeto inicial prevê uma sala para 304 pessoas. No caso de utilizarem 19 fileiras, o número de cadeiras por fileira será",14,15,16,17,18,1,
+2,EF08MA04,Matemática ,Logaritmo,Wagner Santos,"(ENEM – 2016, questão 148 – caderno rosa) Uma liga metálica sai do forno a uma temperatura de 3000°C e diminui 1% de sua temperatura a cada 30 minutos. Use 0,477 como aproximação para log10(3) e 1,041 como aproximação para log10(11). O tempo decorrido, em horas, até que a liga atinja 30° é mais próximo de",200,"100,",20,152,10,1,
+3,EF08MA04,Matemática ,Porcentagem,Wagner Santos,"A distribuição de salários pagos em uma empresa pode ser analisada destacando-se a parcela total da massa salarial que é paga aos 10% que recebem os maiores salários. Isso pode ser representado na forma de um gráfico formado por dois segmentos de reta, unidos em um ponto P, cuja abscissa tem valor igual a 90, como ilustrado na figura. No eixo horizontal do gráfico tem-se o percentual de funcionários, ordenados de forma crescente pelos valores de seus salários, e no eixo vertical tem-se o percentual do total da massa salarial de todos os funcionários.
+
+O índice de Gini, que mede o grau de concentração de renda de um determinado grupo, pode ser calculado pela razão.
+
+   A   
+A + B
+
+    em que A e B são as medidas das áreas indicadas no gráfico. A empresa tem como meta tornar seu índice de Gini igual ao do país, que é 0,3. Para tanto, precisa ajustar os salários de modo a alterar o percentual que representa a parcela percebida pelos 10% dos funcionários de maior salário em relação ao total da massa salarial.
+
+    Para atingir a meta desejada, o percentual deve ser",40%,20%,10%,8%,5%,1,imagem1.png

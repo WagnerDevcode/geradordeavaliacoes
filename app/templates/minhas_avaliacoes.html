@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minhas Avaliações</title>
+    <link rel="stylesheet" href="../static/css/styles.css" />
+    <style>
+      /* CSS embutido para facilitar o exemplo */
+      .avaliacoes-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        padding: 20px;
+      }
+      .card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        width: 500px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+      }
+      .card-img {
+        max-width: 100%;
+        height: 100px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+      }
+      .upload-img {
+        display: block;
+        margin: 10px auto;
+      }
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: 5px;
+      }
+      button:hover {
+        background-color: #ffffff;
+      }
+      select {
+        margin: 10px;
+      }
+      .success-message {
+        color: green;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 20px;
+      }
+      header,
+      footer {
+        text-align: center;
+        padding: 10px;
+      }
+      nav ul {
+        list-style: none;
+        padding: 0;
+      }
+      nav ul li {
+        display: inline;
+        margin: 0 10px;
+      }
+      nav ul li a {
+        text-decoration: none;
+        color: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Minhas Avaliações</h1>
+      <nav>
+        <ul>
+          <li><a href="{{ url_for('main.index') }}">Início</a></li>
+          <li>
+            <a href="{{ url_for('main.cadastro') }}">Cadastro de Questões</a>
+          </li>
+          <li>
+            <a href="{{ url_for('main.visualizador') }}"
+              >Visualizador de Questões</a
+            >
+          </li>
+          <li>
+            <a href="{{ url_for('main.minhas_avaliacoes') }}"
+              >Minhas Avaliações</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="avaliacoes-container">
+      {% for avaliacao in avaliacoes %}
+      <div class="card">
+        <h2>{{ avaliacao.nome }}</h2>
+        {% if avaliacao.nome %}
+        <img
+          src="{{ url_for('static', filename='header_images/cabecalho1.png') }}"
+          alt="Imagem de Cabeçalho"
+          class="card-img"
+        />
+
+        {% endif %}
+        <form
+          action="{{ url_for('main.minhas_avaliacoes') }}"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <input
+            type="hidden"
+            name="nome_avaliacao"
+            value="{{ avaliacao.nome }}"
+          />
+          <input type="file" name="imagem" class="upload-img" />
+          <button type="submit" name="acao" value="atualizar_imagem">
+            Atualizar Imagem
+          </button>
+        </form>
+        <form action="{{ url_for('main.minhas_avaliacoes') }}" method="POST">
+          <input
+            type="hidden"
+            name="nome_avaliacao"
+            value="{{ avaliacao.nome }}"
+          />
+          <select name="formato">
+            <option value="pdf">PDF</option>
+            <option value="docx">DOCX</option>
+          </select>
+          <button type="submit" name="acao" value="baixar">Baixar</button>
+        </form>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- JavaScript embutido -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const successMessage = "{{ get_flashed_messages() | safe }}";
+        if (successMessage) {
+          const messageContainer = document.createElement("div");
+          messageContainer.className = "success-message";
+          messageContainer.textContent = successMessage;
+          document.body.insertBefore(
+            messageContainer,
+            document.querySelector(".avaliacoes-container")
+          );
+        }
+      });
+    </script>
+    <footer>
+      <p>&copy; 2024 Gerador de Avaliações. Todos os direitos reservados.</p>
+    </footer>
+  </body>
+</html>

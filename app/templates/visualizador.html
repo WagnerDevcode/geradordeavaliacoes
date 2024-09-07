@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visualizador de Questões</title>
+    <link rel="stylesheet" href="../static/css/styles.css" />
+    <link rel="stylesheet" href="../static/css/visualizador.css" />
+    <!-- CSS exclusivo -->
+    <style>
+      /* Estilos para mensagens de alerta */
+      .alert {
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+      }
+      .alert-danger {
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+      }
+      .alert-success {
+        color: #155724;
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+      }
+
+      /* Estilo para imagens para manter o mesmo tamanho */
+      .img-visualizador {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 10px auto;
+        object-fit: cover;
+      }
+
+      /* Retirar o negrito do texto do enunciado */
+      .visualizador-card-body label {
+        font-weight: normal;
+      }
+
+      /* Estilos para alternativas */
+      .visualizador-card-body ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .visualizador-card-body li {
+        font-weight: normal;
+        margin-bottom: 5px;
+      }
+
+      .visualizador-card-body .alternativa-letra {
+        font-weight: bold;
+      }
+
+      /* Estilos para barra de pesquisa */
+      .search-bar {
+        margin-bottom: 20px;
+        padding: 15px;
+        background-color: #f0f0f0;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .search-bar input,
+      .search-bar select {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        flex: 1;
+      }
+
+      .search-bar button {
+        padding: 8px 16px;
+        background-color: #003366; /* Azul escuro */
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .search-bar button:hover {
+        background-color: #002244; /* Azul ainda mais escuro */
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Visualizador de Questões</h1>
+      <nav>
+        <ul>
+          <li><a href="{{ url_for('main.index') }}">Início</a></li>
+          <li>
+            <a href="{{ url_for('main.cadastro') }}">Cadastro de Questões</a>
+          </li>
+          <li>
+            <a href="{{ url_for('main.visualizador') }}"
+              >Visualizador de Questões</a
+            >
+          </li>
+          <li>
+            <a href="{{ url_for('main.minhas_avaliacoes') }}"
+              >Minhas Avaliações</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <div class="visualizador-container">
+      {% with messages = get_flashed_messages(with_categories=True) %} {% if
+      messages %} {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %} {% endif %} {% endwith %}
+
+      <!-- Barra de Pesquisa -->
+      <div class="search-bar">
+        <input type="text" id="search-bncc" placeholder="Código BNCC" />
+
+        <input type="text" id="search-disciplina" placeholder=" Disciplina" />
+        <input type="text" id="search-assunto" placeholder="Assunto" />
+        <input type="text" id="search-autor" placeholder=" Autor" />
+        <button type="button" onclick="filtrarQuestoes()">Filtrar</button>
+      </div>
+
+      <form id="form-avaliacao" method="POST" class="visualizador-form">
+        <div class="visualizador-cards-container">
+          {% for questao in questoes %}
+          <div class="visualizador-card">
+            {% if questao['Imagem'] %}
+            <div class="visualizador-card-image"></div>
+            {% endif %}
+            <div class="visualizador-card-body">
+              <input
+                type="checkbox"
+                name="questao_ids"
+                value="{{ questao['ID'] }}"
+                id="questao-{{ questao['ID'] }}"
+              />
+              <p><strong>Código BNCC:</strong> {{ questao['Código BNCC'] }}</p>
+              <p><strong>Disciplina:</strong> {{ questao['Disciplina'] }}</p>
+              <p><strong>Assunto:</strong> {{ questao['Assunto'] }}</p>
+              <p><strong>Autor:</strong> {{ questao['Autor'] }}</p>
+              <label for="questao-{{ questao['ID'] }}"
+                >{{ questao['Enunciado'] }}</label
+              >
+              <img
+                src="{{ url_for('static', filename='uploads/' ~ questao['Imagem']) }}"
+                alt="Imagem da questão"
+                class="img-visualizador"
+              />
+              <p><strong>Alternativas:</strong></p>
+              <ul>
+                <li>
+                  <span class="alternativa-letra">(A)</span> {{
+                  questao['Alternativa A'] }}
+                </li>
+                <li>
+                  <span class="alternativa-letra">(B)</span> {{
+                  questao['Alternativa B'] }}
+                </li>
+                <li>
+                  <span class="alternativa-letra">(C)</span> {{
+                  questao['Alternativa C'] }}
+                </li>
+                <li>
+                  <span class="alternativa-letra">(D)</span> {{
+                  questao['Alternativa D'] }}
+                </li>
+                <li>
+                  <span class="alternativa-letra">(E)</span> {{
+                  questao['Alternativa E'] }}
+                </li>
+              </ul>
+              <p><strong>Pontuação:</strong> {{ questao['Pontuação'] }}</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <label for="nome_avaliacao" class="visualizador-label"
+          >Nome da Avaliação:</label
+        >
+        <input
+          type="text"
+          id="nome_avaliacao"
+          name="nome_avaliacao"
+          required
+          class="visualizador-input"
+        />
+        <button type="submit" class="visualizador-button">
+          Gerar Avaliação
+        </button>
+      </form>
+    </div>
+    <footer>
+      <p>&copy; 2024 Gerador de Avaliações. Todos os direitos reservados.</p>
+    </footer>
+    <script src="../static/js/script.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("form-avaliacao");
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const formData = new FormData(form);
+
+          for (let [key, value] of formData.entries()) {
+            console.log(key, value);
+          }
+
+          fetch("/visualizador", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.status === "success") {
+                alert(
+                  `Avaliação gerada com sucesso! Você será redirecionado para Minhas Avaliações.`
+                );
+
+                document
+                  .querySelectorAll("input[type=checkbox]")
+                  .forEach((checkbox) => {
+                    checkbox.checked = false;
+                  });
+
+                window.location.href =
+                  "{{ url_for('main.minhas_avaliacoes') }}";
+              } else {
+                alert("Erro ao gerar a avaliação: " + data.message);
+              }
+            })
+            .catch((error) => {
+              console.error("Erro:", error);
+            });
+        });
+      });
+
+      function filtrarQuestoes() {
+        const disciplina = document
+          .getElementById("search-disciplina")
+          .value.toLowerCase();
+        const bncc = document.getElementById("search-bncc").value.toLowerCase();
+        const assunto = document
+          .getElementById("search-assunto")
+          .value.toLowerCase();
+        const autor = document
+          .getElementById("search-autor")
+          .value.toLowerCase();
+
+        document.querySelectorAll(".visualizador-card").forEach((card) => {
+          const cardDisciplina = card
+            .querySelector("p:nth-child(2)")
+            .textContent.toLowerCase();
+          const cardBncc = card
+            .querySelector("p:nth-child(1)")
+            .textContent.toLowerCase();
+          const cardAssunto = card
+            .querySelector("p:nth-child(3)")
+            .textContent.toLowerCase();
+          const cardAutor = card
+            .querySelector("p:nth-child(4)")
+            .textContent.toLowerCase();
+
+          if (
+            cardDisciplina.includes(disciplina) &&
+            cardBncc.includes(bncc) &&
+            cardAssunto.includes(assunto) &&
+            cardAutor.includes(autor)
+          ) {
+            card.style.display = "block";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
